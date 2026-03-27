@@ -67,8 +67,17 @@ A full-stack Football Tournament Management System built with Java Servlets and 
 ### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 
+### League Standings
+![Standings](screenshots/standings.png)
+
+### Team Details
+![Team Details](screenshots/team-details.png)
+
 ### Formations & Tactics
 ![Formations](screenshots/formations.png)
+
+### Create Tournament
+![Tournament](screenshots/tournament.png)
 
 ---
 
@@ -145,5 +154,5 @@ Data powered by [Football-Data.org](https://www.football-data.org/) — free tie
 
 ## 👨‍💻 Author
 
-**Ganesh** — B.Tech CSE, VIT-AP University  
+**Jadapola Sai Ganesh Reddy**
 [GitHub](https://github.com/Learner12313)
