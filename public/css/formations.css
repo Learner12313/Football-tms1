@@ -1,0 +1,419 @@
+/* ===== FORMATIONS.CSS - Formations & Tactics Styles ===== */
+
+/* Formation Selector */
+.formation-selector {
+    margin-bottom: 30px;
+}
+
+.formation-selector h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.formation-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.formation-tab {
+    padding: 12px 25px;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.formation-tab:hover {
+    border-color: var(--secondary);
+    color: var(--text-primary);
+}
+
+.formation-tab.active {
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.2), rgba(0, 217, 255, 0.2));
+    border-color: var(--secondary);
+    color: var(--text-primary);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+/* Formation Display */
+.formation-display {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+}
+
+@media (max-width: 1200px) {
+    .formation-display {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Football Pitch */
+.pitch-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.football-pitch {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-width: 500px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #1a472a 0%, #2d5a3d 50%, #1a472a 100%);
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+}
+
+/* Pitch Markings */
+.pitch-markings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.center-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+.center-circle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+.center-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.left-penalty-box {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 18%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+}
+
+.right-penalty-box {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 18%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: none;
+}
+
+.left-goal-area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 8%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top: none;
+}
+
+.right-goal-area {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 8%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: none;
+}
+
+/* Players Container */
+.players-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Player Marker */
+.player-marker {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.player-marker:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 20;
+}
+
+.player-dot {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent), #ff6b8a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.5);
+    border: 2px solid #fff;
+}
+
+.player-marker:hover .player-dot {
+    box-shadow: 0 6px 25px rgba(233, 69, 96, 0.7);
+}
+
+.player-marker.gk .player-dot {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.5);
+}
+
+.player-marker.defender .player-dot {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.5);
+}
+
+.player-marker.midfielder .player-dot {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.5);
+}
+
+.player-marker.attacker .player-dot {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.5);
+}
+
+.player-label {
+    margin-top: 5px;
+    padding: 3px 8px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* Formation Info */
+.formation-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.formation-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.formation-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.formation-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Positions List */
+.positions-list, .tactics-section, .position-guide {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.positions-list h3, .tactics-section h3, .position-guide h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.positions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.position-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.position-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.position-code {
+    width: 36px;
+    height: 36px;
+    background: var(--secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #000;
+}
+
+.position-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Tactics List */
+.tactics-list {
+    list-style: none;
+}
+
+.tactics-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.tactics-list li:last-child {
+    border-bottom: none;
+}
+
+.tactics-list li::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* Position Guide */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .guide-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.guide-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.guide-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.guide-code {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--secondary);
+}
+
+.guide-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.guide-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes playerAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.player-marker {
+    animation: playerAppear 0.3s ease forwards;
+}
+
+.player-marker:nth-child(1) { animation-delay: 0s; }
+.player-marker:nth-child(2) { animation-delay: 0.05s; }
+.player-marker:nth-child(3) { animation-delay: 0.1s; }
+.player-marker:nth-child(4) { animation-delay: 0.15s; }
+.player-marker:nth-child(5) { animation-delay: 0.2s; }
+.player-marker:nth-child(6) { animation-delay: 0.25s; }
+.player-marker:nth-child(7) { animation-delay: 0.3s; }
+.player-marker:nth-child(8) { animation-delay: 0.35s; }
+.player-marker:nth-child(9) { animation-delay: 0.4s; }
+.player-marker:nth-child(10) { animation-delay: 0.45s; }
+.player-marker:nth-child(11) { animation-delay: 0.5s; }

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football TMS - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">⚽</span>
+                <span class="logo-text">Football TMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- League Selector -->
+        <div class="league-selector">
+            <label for="leagueSelect">Competition</label>
+            <select id="leagueSelect">
+                <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
+                <option value="PD">🇪🇸 La Liga</option>
+                <option value="SA">🇮🇹 Serie A</option>
+                <option value="BL1">🇩🇪 Bundesliga</option>
+                <option value="FL1">🇫🇷 Ligue 1</option>
+                <option value="CL">🏆 Champions League</option>
+                <option value="ELC">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Championship</option>
+                <option value="DED">🇳🇱 Eredivisie</option>
+                <option value="PPL">🇵🇹 Primeira Liga</option>
+                <option value="BSA">🇧🇷 Brasileirão</option>
+                <option value="EC">🇪🇺 Euro Championship</option>
+                <option value="WC">🌍 World Cup</option>
+            </select>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <!-- Dashboard -->
+            <div class="nav-section">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+
+            <!-- Fixtures Section -->
+            <div class="nav-section">
+                <div class="nav-section-title">Fixtures</div>
+                <a href="#" class="nav-item" data-page="live">
+                    <span class="nav-icon">🔴</span>
+                    <span class="nav-text">Live Matches</span>
+                    <span class="nav-badge live" id="liveBadge">0</span>
+                </a>
+                <a href="#" class="nav-item" data-page="upcoming">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Upcoming</span>
+                </a>
+                <a href="#" class="nav-item" data-page="recent">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Recent Results</span>
+                </a>
+            </div>
+
+            <!-- Teams Section -->
+            <div class="nav-section">
+                <div class="nav-section-title">Teams</div>
+                <a href="#" class="nav-item" data-page="teams">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">All Teams</span>
+                </a>
+                <a href="#" class="nav-item" data-page="standings">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Standings</span>
+                </a>
+            </div>
+
+            <!-- Tools Section - Role Based -->
+            <div class="nav-section" id="toolsSection">
+                <div class="nav-section-title">Tools</div>
+                <!-- Create Tournament - User & Admin Only -->
+                <a href="create-tournament.html" class="nav-item" id="navTournament" style="display:none;">
+                    <span class="nav-icon">🏆</span>
+                    <span class="nav-text">Create Tournament</span>
+                </a>
+                <!-- Formations - Manager & Admin Only -->
+                <a href="formations.html" class="nav-item" id="navFormations" style="display:none;">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Formations</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="user-avatar">
+                <span id="userInitial">U</span>
+            </div>
+            <div class="user-details">
+                <span class="user-name" id="userName">User</span>
+                <span class="user-role" id="userRole">Viewer</span>
+            </div>
+            <button class="logout-btn" id="logoutBtn" title="Logout">🚪</button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="page-title">
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="pageSubtitle">Overview of today's football action</p>
+            </div>
+            <div class="top-actions">
+                <button class="refresh-btn" id="refreshBtn">
+                    <span>🔄</span> Refresh
+                </button>
+                <div class="current-time" id="currentTime"></div>
+            </div>
+        </header>
+
+        <!-- Content Container -->
+        <div class="content-container" id="contentContainer">
+            <!-- Dashboard Page -->
+            <div class="page active" id="dashboardPage">
+                <div class="stats-grid">
+                    <div class="stat-card live">
+                        <span class="stat-icon">🔴</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statLive">0</span>
+                            <span class="stat-label">Live Matches</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">📅</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statUpcoming">0</span>
+                            <span class="stat-label">Upcoming</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">✅</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statRecent">0</span>
+                            <span class="stat-label">Completed Today</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">⚽</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statTeams">20</span>
+                            <span class="stat-label">Teams</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Matches Preview -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>🔴 Live Matches</h2>
+                        <a href="#" class="view-all" data-page="live">View All →</a>
+                    </div>
+                    <div class="matches-grid" id="dashboardLive"></div>
+                </div>
+
+                <!-- Upcoming Matches Preview -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>📅 Upcoming Matches</h2>
+                        <a href="#" class="view-all" data-page="upcoming">View All →</a>
+                    </div>
+                    <div class="matches-grid" id="dashboardUpcoming"></div>
+                </div>
+            </div>
+
+            <!-- Live Page -->
+            <div class="page" id="livePage">
+                <div class="page-header">
+                    <h2>🔴 Live Matches</h2>
+                    <p>Currently in progress</p>
+                </div>
+                <div class="matches-grid" id="liveMatches"></div>
+            </div>
+
+            <!-- Upcoming Page -->
+            <div class="page" id="upcomingPage">
+                <div class="page-header">
+                    <h2>📅 Upcoming Matches</h2>
+                    <p>Scheduled fixtures</p>
+                </div>
+                <div class="matches-grid" id="upcomingMatches"></div>
+            </div>
+
+            <!-- Recent Page -->
+            <div class="page" id="recentPage">
+                <div class="page-header">
+                    <h2>✅ Recent Results</h2>
+                    <p>Completed matches</p>
+                </div>
+                <div class="matches-grid" id="recentMatches"></div>
+            </div>
+
+            <!-- Teams Page -->
+            <div class="page" id="teamsPage">
+                <div class="page-header">
+                    <h2>👥 All Teams</h2>
+                    <p>Click on a team to view details</p>
+                </div>
+                <div class="teams-grid" id="teamsList"></div>
+            </div>
+
+            <!-- Team Details Page -->
+            <div class="page" id="teamDetailsPage">
+                <div class="team-details" id="teamDetailsContent"></div>
+            </div>
+
+            <!-- Standings Page -->
+            <div class="page" id="standingsPage">
+                <div class="page-header">
+                    <h2>📊 League Standings</h2>
+                    <p>Current table positions</p>
+                </div>
+                <div class="standings-container" id="standingsTable"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>© 2024 Football TMS. Data provided by football-data.org</p>
+        </footer>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-ball"></div>
+            <span>Loading...</span>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

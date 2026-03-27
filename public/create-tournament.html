@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Tournament - Football TMS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tournament.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">⚽</span>
+                <span class="logo-text">Football TMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- League Selector -->
+        <div class="league-selector">
+            <label for="leagueSelect">Competition</label>
+            <select id="leagueSelect">
+                <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
+                <option value="PD">🇪🇸 La Liga</option>
+                <option value="SA">🇮🇹 Serie A</option>
+                <option value="BL1">🇩🇪 Bundesliga</option>
+                <option value="FL1">🇫🇷 Ligue 1</option>
+                <option value="CL">🏆 Champions League</option>
+                <option value="ELC">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Championship</option>
+                <option value="DED">🇳🇱 Eredivisie</option>
+                <option value="PPL">🇵🇹 Primeira Liga</option>
+                <option value="BSA">🇧🇷 Brasileirão</option>
+                <option value="EC">🇪🇺 Euro Championship</option>
+                <option value="WC">🌍 World Cup</option>
+            </select>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <div class="nav-section">
+                <a href="index.html" class="nav-item" data-page="dashboard">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Fixtures</div>
+                <a href="index.html" class="nav-item" data-page="live">
+                    <span class="nav-icon">🔴</span>
+                    <span class="nav-text">Live Matches</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="upcoming">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Upcoming</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="recent">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Recent Results</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teams</div>
+                <a href="index.html" class="nav-item" data-page="teams">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">All Teams</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="standings">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Standings</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Create</div>
+                <a href="create-tournament.html" class="nav-item active">
+                    <span class="nav-icon">🏆</span>
+                    <span class="nav-text">Create Tournament</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="user-avatar">
+                <span id="userInitial">U</span>
+            </div>
+            <div class="user-details">
+                <span class="user-name" id="userName">User</span>
+                <span class="user-role" id="userRole">Viewer</span>
+            </div>
+            <button class="logout-btn" id="logoutBtn" title="Logout">🚪</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="page-title">
+                <h1>🏆 Create Tournament</h1>
+                <p>Design your own custom tournament</p>
+            </div>
+            <div class="top-actions">
+                <button class="refresh-btn" onclick="loadTournaments()">
+                    <span>🔄</span> Refresh
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Create Tournament Form -->
+            <div class="tournament-form-container">
+                <div class="form-card">
+                    <h2>📋 Tournament Details</h2>
+                    
+                    <form id="tournamentForm">
+                        <div class="form-group">
+                            <label for="tournamentName">Tournament Name</label>
+                            <input type="text" id="tournamentName" placeholder="e.g., Summer Cup 2024" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="teamsCount">Number of Teams</label>
+                                <select id="teamsCount" onchange="updateTeamInputs()">
+                                    <option value="4">4 Teams</option>
+                                    <option value="6">6 Teams</option>
+                                    <option value="8" selected>8 Teams</option>
+                                    <option value="10">10 Teams</option>
+                                    <option value="12">12 Teams</option>
+                                    <option value="16">16 Teams</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="format">Tournament Format</label>
+                                <select id="format">
+                                    <option value="round-robin">Round Robin (League)</option>
+                                    <option value="knockout">Knockout</option>
+                                    <option value="group-knockout">Group Stage + Knockout</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Team Names</label>
+                            <div class="teams-input-grid" id="teamsInputGrid">
+                                <!-- Dynamic team inputs -->
+                            </div>
+                        </div>
+
+                        <button type="submit" class="create-btn">
+                            <span>🏆</span> Create Tournament
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tournament Preview -->
+                <div class="preview-card">
+                    <h2>👁️ Tournament Preview</h2>
+                    <div class="preview-content" id="previewContent">
+                        <p class="preview-placeholder">Fill in the form to see preview</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Tournaments -->
+            <div class="my-tournaments-section">
+                <h2>📋 My Tournaments</h2>
+                <div class="tournaments-grid" id="tournamentsGrid">
+                    <!-- Dynamic tournaments list -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>© 2024 Football TMS. Tournament Management System</p>
+        </footer>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-ball"></div>
+            <span>Loading...</span>
+        </div>
+    </div>
+
+    <script src="js/tournament.js"></script>
+</body>
+</html>

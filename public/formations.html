@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formations & Tactics - Football TMS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/formations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">⚽</span>
+                <span class="logo-text">Football TMS</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- League Selector -->
+        <div class="league-selector">
+            <label for="leagueSelect">Competition</label>
+            <select id="leagueSelect">
+                <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
+                <option value="PD">🇪🇸 La Liga</option>
+                <option value="SA">🇮🇹 Serie A</option>
+                <option value="BL1">🇩🇪 Bundesliga</option>
+                <option value="FL1">🇫🇷 Ligue 1</option>
+                <option value="CL">🏆 Champions League</option>
+                <option value="ELC">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Championship</option>
+                <option value="DED">🇳🇱 Eredivisie</option>
+                <option value="PPL">🇵🇹 Primeira Liga</option>
+                <option value="BSA">🇧🇷 Brasileirão</option>
+                <option value="EC">🇪🇺 Euro Championship</option>
+                <option value="WC">🌍 World Cup</option>
+            </select>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <div class="nav-section">
+                <a href="index.html" class="nav-item" data-page="dashboard">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Fixtures</div>
+                <a href="index.html" class="nav-item" data-page="live">
+                    <span class="nav-icon">🔴</span>
+                    <span class="nav-text">Live Matches</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="upcoming">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Upcoming</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="recent">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Recent Results</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teams</div>
+                <a href="index.html" class="nav-item" data-page="teams">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">All Teams</span>
+                </a>
+                <a href="index.html" class="nav-item" data-page="standings">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Standings</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Tactics</div>
+                <a href="formations.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Formations</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="user-avatar">
+                <span id="userInitial">M</span>
+            </div>
+            <div class="user-details">
+                <span class="user-name" id="userName">Manager</span>
+                <span class="user-role" id="userRole">Manager</span>
+            </div>
+            <button class="logout-btn" id="logoutBtn" title="Logout">🚪</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="page-title">
+                <h1>📋 Formations & Tactics</h1>
+                <p>Explore different football formations and their strategies</p>
+            </div>
+            <div class="top-actions">
+                <button class="refresh-btn" onclick="loadFormations()">
+                    <span>🔄</span> Refresh
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Formation Selector -->
+            <div class="formation-selector">
+                <h2>Select Formation</h2>
+                <div class="formation-tabs" id="formationTabs">
+                    <!-- Dynamic formation tabs -->
+                </div>
+            </div>
+
+            <!-- Formation Display -->
+            <div class="formation-display">
+                <!-- Football Pitch -->
+                <div class="pitch-container">
+                    <div class="football-pitch" id="footballPitch">
+                        <!-- Field markings -->
+                        <div class="pitch-markings">
+                            <div class="center-circle"></div>
+                            <div class="center-line"></div>
+                            <div class="left-penalty-box"></div>
+                            <div class="right-penalty-box"></div>
+                            <div class="left-goal-area"></div>
+                            <div class="right-goal-area"></div>
+                        </div>
+                        <!-- Player positions will be added dynamically -->
+                        <div class="players-container" id="playersContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Formation Info -->
+                <div class="formation-info">
+                    <div class="formation-header">
+                        <h2 id="formationName">4-3-3</h2>
+                        <p id="formationDescription">Loading...</p>
+                    </div>
+
+                    <div class="positions-list">
+                        <h3>📍 Positions</h3>
+                        <div class="positions-grid" id="positionsGrid">
+                            <!-- Dynamic positions -->
+                        </div>
+                    </div>
+
+                    <div class="tactics-section">
+                        <h3>💡 Tactics & Strategy</h3>
+                        <ul class="tactics-list" id="tacticsList">
+                            <!-- Dynamic tactics -->
+                        </ul>
+                    </div>
+
+                    <div class="position-guide">
+                        <h3>📚 Position Guide</h3>
+                        <div class="guide-grid">
+                            <div class="guide-item">
+                                <span class="guide-code">GK</span>
+                                <span class="guide-name">Goalkeeper</span>
+                                <span class="guide-desc">Last line of defense</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">CB</span>
+                                <span class="guide-name">Center Back</span>
+                                <span class="guide-desc">Central defender</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">LB/RB</span>
+                                <span class="guide-name">Full Back</span>
+                                <span class="guide-desc">Wide defenders</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">CDM</span>
+                                <span class="guide-name">Defensive Mid</span>
+                                <span class="guide-desc">Holding midfielder</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">CM</span>
+                                <span class="guide-name">Center Mid</span>
+                                <span class="guide-desc">Box-to-box player</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">CAM</span>
+                                <span class="guide-name">Attacking Mid</span>
+                                <span class="guide-desc">Creative playmaker</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">LM/RM</span>
+                                <span class="guide-name">Wide Midfielder</span>
+                                <span class="guide-desc">Wide playmaker</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">LW/RW</span>
+                                <span class="guide-name">Winger</span>
+                                <span class="guide-desc">Wide attacker</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">ST</span>
+                                <span class="guide-name">Striker</span>
+                                <span class="guide-desc">Main goal scorer</span>
+                            </div>
+                            <div class="guide-item">
+                                <span class="guide-code">LWB/RWB</span>
+                                <span class="guide-name">Wingback</span>
+                                <span class="guide-desc">Attacking full back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>© 2024 Football TMS. Tactical Analysis System</p>
+        </footer>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-ball"></div>
+            <span>Loading...</span>
+        </div>
+    </div>
+
+    <script src="js/formations.js"></script>
+</body>
+</html>
