@@ -1,3 +1,6 @@
 ApiConfig.java
 *.class
 target/
+classes/
+*.db
+*.sqlite
